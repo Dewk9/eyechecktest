@@ -1,0 +1,6 @@
+{
+  "name": "eye-check-ai-shared",
+  "private": true,
+  "type": "module",
+  "description": "Pure JavaScript AI helpers shared by the backend (Node) and the browser: Roboflow response normalisation, class mapping and image-quality metrics. No dependencies, no secrets."
+}

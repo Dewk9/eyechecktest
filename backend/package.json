@@ -1,0 +1,38 @@
+{
+  "name": "eye-check-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "EYE Check backend API — Express + Supabase + Roboflow",
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=20.10"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "check-config": "node scripts/check-config.js",
+    "db:migrate": "node scripts/migrate.js",
+    "db:snapshot": "node scripts/migrate.js --snapshot",
+    "create-admin": "node scripts/create-admin.js",
+    "create-staff-code": "node scripts/create-staff-code.js",
+    "test": "node --test \"test/unit/*.test.js\"",
+    "test:integration": "node --test \"test/integration/*.test.js\"",
+    "test:roboflow": "node scripts/test-roboflow.js"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "0.10.14",
+    "@supabase/supabase-js": "^2.45.4",
+    "chart.js": "^4.4.6",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.4.1",
+    "helmet": "^8.0.0",
+    "multer": "^2.0.2",
+    "pg": "^8.13.1",
+    "sharp": "^0.33.5",
+    "zod": "^3.23.8"
+  }
+}

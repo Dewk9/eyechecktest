@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EYE Check — ระบบตรวจคัดกรองโรคต้อในดวงตาด้วย AI</title>
+  <meta name="description" content="EYE Check ระบบตรวจคัดกรองโรคต้อในดวงตาด้วยปัญญาประดิษฐ์ ซักประวัติ ทดสอบการมองเห็น ถ่ายภาพดวงตา วิเคราะห์ด้วย AI และติดตามผล">
+  <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;700;800&family=Sarabun:wght@400;600;700;800&display=swap">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/components.css">
+  <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <link rel="stylesheet" href="/css/print.css">
+</head>
+<body data-page="home" data-public="true">
+  <header id="site-header"></header>
+  <script src="/js/boot.js"></script>
+  <main id="main" tabindex="-1">
+
+    <!-- 1. Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="fade-up">
+          <span class="eyebrow"><img src="/assets/logo.svg" alt="" width="20" height="20"> EYE Check · AI Eye Screening</span>
+          <h1 id="hero-title">ระบบตรวจคัดกรอง<span>โรคต้อในดวงตา</span>ด้วย AI</h1>
+          <p class="lead">ซักประวัติสุขภาพ ทดสอบการมองเห็น ถ่ายภาพดวงตาผ่านกล้องโทรศัพท์หรือเว็บแคม แล้ววิเคราะห์ด้วยโมเดล Deep Learning เพื่อคัดกรองความเสี่ยงต้อลม ต้อกระจก ต้อเนื้อ และสัญญาณที่ควรตรวจต้อหินเพิ่มเติม พร้อมจัดเก็บประวัติและติดตามผลได้ทุกที่</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="/pages/medical-history.html" id="cta-start">เริ่มตรวจคัดกรอง</a>
+            <a class="btn btn-lg" href="#how">เรียนรู้เพิ่มเติม</a>
+          </div>
+          <span class="ai-status-chip" id="ai-status" aria-live="polite"><span class="status-dot"></span>กำลังตรวจสอบสถานะการเชื่อมต่อ AI...</span>
+        </div>
+        <div class="hero-art fade-up">
+          <img src="/assets/hero-eye.svg" alt="ภาพประกอบเทคโนโลยี AI วิเคราะห์ภาพดวงตา" width="520" height="440">
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Features -->
+    <section class="section" aria-labelledby="features-title">
+      <div class="container">
+        <h2 id="features-title" class="center">ความสามารถของระบบ</h2>
+        <p class="center muted mb-4">ทุกขั้นตอนเชื่อมโยงกันเป็น Workflow เดียว ตั้งแต่ซักประวัติจนถึงการติดตามผล</p>
+        <div class="grid grid-3" id="feature-grid"></div>
+      </div>
+    </section>
+
+    <!-- 3. How it works -->
+    <section class="section" id="how" aria-labelledby="how-title" style="background:#fff">
+      <div class="container">
+        <h2 id="how-title" class="center">ขั้นตอนการทำงาน</h2>
+        <p class="center muted mb-4">ใช้เวลาประมาณ 5–15 นาทีต่อการตรวจหนึ่งครั้ง</p>
+        <ol class="steps">
+          <li><strong>สมัครสมาชิก</strong><span>บัญชีส่วนบุคคล หรือ อสม./เจ้าหน้าที่</span></li>
+          <li><strong>ซักประวัติ</strong><span>ช่วงอายุ ปัจจัยเสี่ยง และอาการผิดปกติ</span></li>
+          <li><strong>ทดสอบการมองเห็น</strong><span>ทดสอบตาซ้าย–ขวาแยกกันผ่านหน้าจอ</span></li>
+          <li><strong>ถ่ายภาพดวงตา</strong><span>ระบบช่วยจัดตำแหน่งและตรวจคุณภาพภาพ</span></li>
+          <li><strong>วิเคราะห์ด้วย AI</strong><span>ส่งภาพไปยังโมเดลบน Roboflow</span></li>
+          <li><strong>แสดงผลการคัดกรอง</strong><span>แยกผล AI ผลซักประวัติ และคำแนะนำ</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 4. Feature comparison (dark mode) -->
+    <section class="compare-section" aria-labelledby="compare-title">
+      <div class="container">
+        <span class="compare-badge">AI EYE SCREENING TECHNOLOGY</span>
+        <h2 id="compare-title">เปรียบเทียบเทคโนโลยีการตรวจคัดกรองดวงตา</h2>
+        <p class="compare-desc">เปรียบเทียบความสามารถของระบบ AI กับวิธีตรวจคัดกรองทั่วไป</p>
+        <div class="compare-box">
+          <table class="compare-table" id="compare-table">
+            <caption class="sr-only">ตารางเปรียบเทียบความสามารถของวิธีการตรวจคัดกรองดวงตา 3 รูปแบบ</caption>
+            <thead>
+              <tr>
+                <th scope="col">คุณสมบัติ</th>
+                <th scope="col" class="col-ai">ระบบตรวจคัดกรองด้วย AI</th>
+                <th scope="col">การตรวจคัดกรองทั่วไป</th>
+                <th scope="col">การตรวจโดยจักษุแพทย์</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+        <p class="compare-foot" id="compare-foot"></p>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section">
+      <div class="container">
+        <div class="card row-between">
+          <div>
+            <h2 class="mb-0">พร้อมเริ่มตรวจคัดกรองแล้วหรือยัง?</h2>
+            <p class="muted mb-0">สมัครสมาชิกฟรี ข้อมูลสุขภาพของคุณถูกจัดเก็บอย่างปลอดภัยตาม PDPA</p>
+          </div>
+          <div class="row">
+            <a class="btn btn-primary btn-lg" href="/pages/medical-history.html">เริ่มตรวจคัดกรอง</a>
+            <a class="btn btn-lg" href="/pages/guide.html">อ่านคู่มือการใช้งาน</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

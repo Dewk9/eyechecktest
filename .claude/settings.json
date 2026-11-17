@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\setth\\\\OneDrive\\\\เดสก์ท็อป\\\\evecheck\\\\frontend\\\\pages\")",
+      "PowerShell(node \"C:\\\\Users\\\\setth\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\88ff18c040b692dd\\\\fa96851c-92c9-4e11-beee-87c0c155949e\\\\scratchpad\\\\gen-pages.mjs\" \"c:\\\\Users\\\\setth\\\\OneDrive\\\\เดสก์ท็อป\\\\evecheck\\\\frontend\\\\pages\")",
+      "PowerShell(node \"C:\\\\Users\\\\setth\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\88ff18c040b692dd\\\\fa96851c-92c9-4e11-beee-87c0c155949e\\\\scratchpad\\\\check-syntax.mjs\" \"c:\\\\Users\\\\setth\\\\OneDrive\\\\เดสก์ท็อป\\\\evecheck\\\\frontend\" \"c:\\\\Users\\\\setth\\\\OneDrive\\\\เดสก์ท็อป\\\\evecheck\\\\ai\" \"c:\\\\Users\\\\setth\\\\OneDrive\\\\เดสก์ท็อป\\\\evecheck\\\\backend\\\\src\" \"c:\\\\Users\\\\setth\\\\OneDrive\\\\เดสก์ท็อป\\\\evecheck\\\\backend\\\\scripts\")",
+      "PowerShell(npm test 2>&1)",
+      "PowerShell(node \"C:\\\\Users\\\\setth\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\88ff18c040b692dd\\\\fa96851c-92c9-4e11-beee-87c0c155949e\\\\scratchpad\\\\check-imports.mjs\" \"c:\\\\Users\\\\setth\\\\OneDrive\\\\เดสก์ท็อป\\\\evecheck\")",
+      "PowerShell(node src/server.js 2>&1 | Select-Object -First 8; \"--- exit: $LASTEXITCODE\")",
+      "PowerShell(npm run db:snapshot 2>&1)",
+      "PowerShell($edge = @\\(\"C:\\\\Program Files \\(x86\\)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\",\"C:\\\\Program Files\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\",\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\"\\) | Where-Object { Test-Path $_ } | Select-Object -First 1; \"browser: $edge\")"
+    ]
+  }
+}

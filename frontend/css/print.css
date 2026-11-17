@@ -1,0 +1,17 @@
+/* Printable screening report */
+@media print {
+  @page { size: A4; margin: 14mm; }
+  html, body { background: #fff; color: #000; font-size: 11pt; }
+  main { min-height: 0 !important; }
+  .site-header, .site-footer, .no-print, .toast-region, .offline-banner, .stepper, .result-actions, .admin-sidebar, .skip-link { display: none !important; }
+  .print-only { display: block !important; }
+  .card { box-shadow: none; border: 1px solid #bbb; break-inside: avoid; padding: 10px 14px; }
+  .container { max-width: none; padding: 0; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr 1fr; }
+  .result-head { grid-template-columns: 220px 1fr; }
+  .risk-banner { border-width: 2px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .badge, .conf-bar > span { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a { color: #000; text-decoration: none; }
+  .page-head { padding: 0 0 8px; }
+}
+.print-only { display: none; }
