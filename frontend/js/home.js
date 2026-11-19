@@ -30,7 +30,34 @@ const ROWS = [
 ];
 const COLS = ['', 'ระบบตรวจคัดกรองด้วย AI', 'การตรวจคัดกรองทั่วไป', 'การตรวจโดยจักษุแพทย์'];
 
+// Hero illustration: natural blinking at random intervals (sometimes a double blink).
+// Only toggles a class; the 200ms lid motion itself is a CSS animation (css/hero-eye.css).
+// Skipped for reduced motion, and no blink is triggered while the tab is hidden or the hero is off-screen.
+function initHeroBlink() {
+  const eye = qs('.hero-eye');
+  if (!eye || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  eye.classList.add('js-blink');
+  const art = eye.closest('.hero-art');
+  const next = (wasDouble) => (!wasDouble && Math.random() < 0.18 ? 340 : 2600 + Math.random() * 4200);
+  const blink = (wasDouble = false) => {
+    if (!eye.isConnected) return;
+    const visible = !document.hidden && !art?.classList.contains('is-offscreen');
+    let isDouble = false;
+    if (visible) {
+      eye.classList.add('is-blink');
+      setTimeout(() => eye.classList.remove('is-blink'), 240);
+      const wait = next(wasDouble);
+      isDouble = wait < 1000;
+      setTimeout(() => blink(isDouble), wait);
+    } else {
+      setTimeout(() => blink(), 2000);
+    }
+  };
+  setTimeout(() => blink(), 1800 + Math.random() * 1500);
+}
+
 export async function init() {
+  initHeroBlink();
   qs('#feature-grid').innerHTML = FEATURES.map((f) => `
     <article class="card card-hover feature-card">
       <div class="icon-bubble">${icons[f.icon]}</div>

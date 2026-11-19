@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/components.css">
   <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/hero-eye.css">
   <link rel="stylesheet" href="/css/responsive.css">
   <link rel="stylesheet" href="/css/print.css">
 </head>
@@ -34,7 +35,97 @@
           <span class="ai-status-chip" id="ai-status" aria-live="polite"><span class="status-dot"></span>กำลังตรวจสอบสถานะการเชื่อมต่อ AI...</span>
         </div>
         <div class="hero-art fade-up">
-          <img src="/assets/hero-eye.svg" alt="ภาพประกอบเทคโนโลยี AI วิเคราะห์ภาพดวงตา" width="520" height="440">
+          <div class="hero-eye-wrap"><div class="hero-eye-stage">
+            <svg class="hero-eye" viewBox="0 0 520 440" width="520" height="440" role="img" aria-label="ภาพประกอบเคลื่อนไหว: ดวงตาในกรอบตรวจจับของ AI (ภาพประกอบเท่านั้น ไม่ใช่การวิเคราะห์จริง)" focusable="false">
+              <defs>
+                <linearGradient id="he-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e6f5fd"/><stop offset="1" stop-color="#e5f8ef"/></linearGradient>
+                <radialGradient id="he-iris" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#3aa9e6"/><stop offset=".65" stop-color="#0b6fb3"/><stop offset="1" stop-color="#073f66"/></radialGradient>
+                <radialGradient id="he-halo" cx="50%" cy="50%" r="50%"><stop offset=".55" stop-color="#22d3ee" stop-opacity=".55"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
+                <radialGradient id="he-sheen" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#e0fbff" stop-opacity=".9"/><stop offset="1" stop-color="#e0fbff" stop-opacity="0"/></radialGradient>
+                <linearGradient id="he-lid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d4ecf9"/><stop offset="1" stop-color="#bfe0f2"/></linearGradient>
+                <linearGradient id="he-lid-lo" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#d6f1e6"/><stop offset="1" stop-color="#bfe0f2"/></linearGradient>
+                <linearGradient id="he-beam" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#22d3ee" stop-opacity="0"/><stop offset=".5" stop-color="#22d3ee"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></linearGradient>
+                <linearGradient id="he-trail" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22d3ee" stop-opacity="0"/><stop offset="1" stop-color="#22d3ee" stop-opacity=".28"/></linearGradient>
+                <clipPath id="he-clip"><path d="M80 230c50-72 112-108 180-108s130 36 180 108c-50 72-112 108-180 108S130 302 80 230z"/></clipPath>
+              </defs>
+              <rect x="20" y="20" width="480" height="400" rx="36" fill="url(#he-bg)"/>
+              <!-- neural network -->
+              <g class="he-net" stroke="#9fd3ef" stroke-width="2" fill="none">
+                <path d="M70 90 L140 60 L210 95 M70 90 L130 140 L210 95 M380 70 L450 110 L410 165 M380 70 L330 120 L410 165"/>
+                <path d="M80 350 L150 380 L220 345 M300 350 L370 385 L440 340"/>
+                <path class="he-link" d="M130 140 L140 150 M330 120 L350 150 M220 345 L170 310 M300 350 L350 310" stroke-dasharray="3 5"/>
+              </g>
+              <g class="he-nodes" fill="#0b8fd8">
+                <circle cx="70" cy="90" r="7" style="--d:0s"/><circle cx="140" cy="60" r="6" style="--d:.6s"/><circle cx="210" cy="95" r="7" style="--d:1.2s"/><circle cx="130" cy="140" r="5" style="--d:1.8s"/>
+                <circle cx="380" cy="70" r="6" style="--d:.3s"/><circle cx="450" cy="110" r="7" style="--d:.9s"/><circle cx="410" cy="165" r="5" style="--d:1.5s"/><circle cx="330" cy="120" r="6" style="--d:2.1s"/>
+              </g>
+              <g class="he-nodes" fill="#34c38f">
+                <circle cx="80" cy="350" r="6" style="--d:.4s"/><circle cx="150" cy="380" r="7" style="--d:1s"/><circle cx="220" cy="345" r="5" style="--d:1.6s"/>
+                <circle cx="300" cy="350" r="6" style="--d:.7s"/><circle cx="370" cy="385" r="7" style="--d:1.3s"/><circle cx="440" cy="340" r="5" style="--d:1.9s"/>
+              </g>
+              <g class="he-packets">
+                <circle class="he-pk he-pk-1" cx="70" cy="90" r="3.5" fill="#22d3ee"/>
+                <circle class="he-pk he-pk-2" cx="380" cy="70" r="3.5" fill="#22d3ee"/>
+                <circle class="he-pk he-pk-3" cx="300" cy="350" r="3.5" fill="#34c38f"/>
+              </g>
+              <!-- eye: gaze, scanner and eyelids are clipped to the eye shape -->
+              <path d="M80 230c50-72 112-108 180-108s130 36 180 108c-50 72-112 108-180 108S130 302 80 230z" fill="#fff"/>
+              <g clip-path="url(#he-clip)">
+                <g class="he-gaze">
+                  <circle class="he-halo" cx="260" cy="230" r="92" fill="url(#he-halo)"/>
+                  <circle cx="260" cy="230" r="72" fill="url(#he-iris)"/>
+                  <path d="M295 230L328 230M294.3 236.8L318.8 241.7M292.3 243.4L322.8 256M289.1 249.4L309.9 263.3M284.7 254.7L308.1 278.1M279.4 259.1L293.3 279.9M273.4 262.3L286 292.8M266.8 264.3L271.7 288.8M260 265L260 298M253.2 264.3L248.3 288.8M246.6 262.3L234 292.8M240.6 259.1L226.7 279.9M235.3 254.7L211.9 278.1M230.9 249.4L210.1 263.3M227.7 243.4L197.2 256M225.7 236.8L201.2 241.7M225 230L192 230M225.7 223.2L201.2 218.3M227.7 216.6L197.2 204M230.9 210.6L210.1 196.7M235.3 205.3L211.9 181.9M240.6 200.9L226.7 180.1M246.6 197.7L234 167.2M253.2 195.7L248.3 171.2M260 195L260 162M266.8 195.7L271.7 171.2M273.4 197.7L286 167.2M279.4 200.9L293.3 180.1M284.7 205.3L308.1 181.9M289.1 210.6L309.9 196.7M292.3 216.6L322.8 204M294.3 223.2L318.8 218.3" stroke="#7cc8f0" stroke-width="1.6" stroke-linecap="round" opacity=".45"/>
+                  <circle cx="260" cy="230" r="71" fill="none" stroke="#06345a" stroke-width="3" opacity=".55"/>
+                  <circle class="he-pupil" cx="260" cy="230" r="30" fill="#04192b"/>
+                  <circle class="he-sheen" cx="260" cy="230" r="70" fill="url(#he-sheen)"/>
+                  <circle cx="282" cy="206" r="13" fill="#fff" opacity=".9"/>
+                  <circle cx="242" cy="250" r="5" fill="#fff" opacity=".45"/>
+                </g>
+                <g class="he-scan">
+                  <rect x="80" y="-46" width="360" height="46" fill="url(#he-trail)"/>
+                  <rect x="80" y="-5" width="360" height="10" fill="url(#he-beam)" opacity=".35"/>
+                  <rect x="80" y="-1.5" width="360" height="3" fill="url(#he-beam)"/>
+                </g>
+                <rect class="he-lid he-lid-up" x="76" y="116" width="368" height="118" fill="url(#he-lid)"/>
+                <rect class="he-lid he-lid-lo" x="76" y="226" width="368" height="118" fill="url(#he-lid-lo)"/>
+              </g>
+              <path d="M80 230c50-72 112-108 180-108s130 36 180 108c-50 72-112 108-180 108S130 302 80 230z" fill="none" stroke="#0b8fd8" stroke-width="5"/>
+              <!-- tracking points (follow the gaze) -->
+              <g class="he-track">
+                <path d="M260 138L325.1 164.9L352 230L325.1 295.1L260 322L194.9 295.1L168 230L194.9 164.9ZM260 138L260 230M352 230L260 230M260 322L260 230M168 230L260 230" fill="none" stroke="#22d3ee" stroke-width="1.2" opacity=".35"/>
+                <circle class="he-ring" cx="260" cy="230" r="92" fill="none" stroke="#34c38f" stroke-width="1.6" stroke-dasharray="3 9" opacity=".7"/>
+                <g fill="#fff" stroke="#22d3ee" stroke-width="2"><circle class="he-tp" cx="260" cy="138" r="4.5" style="--d:0.00s"/><circle class="he-tp" cx="325.1" cy="164.9" r="3.5" style="--d:0.35s"/><circle class="he-tp" cx="352" cy="230" r="4.5" style="--d:0.70s"/><circle class="he-tp" cx="325.1" cy="295.1" r="3.5" style="--d:1.05s"/><circle class="he-tp" cx="260" cy="322" r="4.5" style="--d:1.40s"/><circle class="he-tp" cx="194.9" cy="295.1" r="3.5" style="--d:1.75s"/><circle class="he-tp" cx="168" cy="230" r="4.5" style="--d:2.10s"/><circle class="he-tp" cx="194.9" cy="164.9" r="3.5" style="--d:2.45s"/></g>
+                <path d="M251 230H269M260 221V239" stroke="#5eead4" stroke-width="1.6" opacity=".8"/>
+              </g>
+              <!-- AI detection frame -->
+              <g class="he-frame" fill="none" stroke-linecap="round">
+                <g class="he-frame-glow" stroke="#5eead4" stroke-width="14">
+                  <path d="M170 150 h-30 v30"/><path d="M350 150 h30 v30"/><path d="M170 310 h-30 v-30"/><path d="M350 310 h30 v-30"/>
+                </g>
+                <g stroke="#34c38f" stroke-width="5">
+                  <path d="M170 150 h-30 v30"/><path d="M350 150 h30 v30"/><path d="M170 310 h-30 v-30"/><path d="M350 310 h30 v-30"/>
+                </g>
+              </g>
+              <g class="he-tag" transform="translate(140 124)">
+                <rect width="82" height="18" rx="9" fill="#34c38f"/>
+                <text x="41" y="12.6" text-anchor="middle" fill="#fff" font-size="10" font-weight="800" letter-spacing=".08em">EYE REGION</text>
+              </g>
+              <!-- status card: decorative motion text only, not a real analysis state -->
+              <g class="he-card" transform="translate(330 262)">
+                <rect width="150" height="64" rx="14" fill="#fff" stroke="#d3edfb" stroke-width="2"/>
+                <circle class="he-dot-ring" cx="20" cy="20" r="4" fill="#34c38f"/>
+                <circle cx="20" cy="20" r="4" fill="#34c38f"/>
+                <text x="31" y="24" fill="#0b6fb3" font-size="10.5" font-weight="800" letter-spacing=".06em">AI EYE DETECTION</text>
+                <g fill="#3d5670" font-size="11.5" font-weight="600">
+                  <text class="he-msg" x="14" y="42">Scanning eye…</text>
+                  <text class="he-msg" x="14" y="42">Tracking iris…</text>
+                  <text class="he-msg" x="14" y="42">Locating eye region…</text>
+                </g>
+                <rect x="14" y="50" width="122" height="5" rx="2.5" fill="#d3edfb"/>
+                <rect class="he-bar" x="14" y="50" width="122" height="5" rx="2.5" fill="#34c38f"/>
+              </g>
+            </svg>
+          </div></div>
         </div>
       </div>
     </section>

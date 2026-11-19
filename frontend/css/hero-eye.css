@@ -1,0 +1,130 @@
+/* =====================================================================
+   EYE Check — homepage hero: animated AI eye scanner (index.html only)
+   Decorative motion only: nothing here reflects a real analysis state.
+   Only transform + opacity are animated. The whole illustration pauses
+   while scrolled out of view (.hero-art → js/motion.js → .is-offscreen),
+   and the random blink timing comes from js/home.js (CSS fallback below).
+   ===================================================================== */
+/* Same box the previous <img width=520 height=440> occupied (100% wide, max 520px, 440px tall,
+   artwork centred inside), so the hero keeps exactly the same size and layout. */
+.hero-eye-wrap { display: grid; place-items: center; width: 100%; max-width: 520px; height: 440px; margin: 0 auto; }
+.hero-eye-stage { position: relative; width: min(100%, 520px); aspect-ratio: 520 / 440; }
+/* soft shadow of the rounded card (static layer: no filter re-rendered on every animation frame) */
+.hero-eye-stage::before {
+  content: ""; position: absolute; inset: 4.55% 3.85%; border-radius: 6.9% / 8.2%;
+  box-shadow: 0 24px 40px rgba(11, 143, 216, .18); pointer-events: none;
+}
+.hero-eye { position: relative; display: block; width: 100%; height: 100%; overflow: visible; }
+.hero-eye text { font-family: var(--font); }
+
+/* shared: scale / rotate around each shape's own centre */
+.hero-eye .he-pupil, .hero-eye .he-tp, .hero-eye .he-ring, .hero-eye .he-dot-ring,
+.hero-eye .he-nodes circle, .hero-eye .he-frame { transform-box: fill-box; transform-origin: center; }
+
+/* ---------- base (resting) state ---------- */
+.hero-eye .he-lid { transform: scaleY(0); transform-box: fill-box; }
+.hero-eye .he-lid-up { transform-origin: 50% 0; }
+.hero-eye .he-lid-lo { transform-origin: 50% 100%; }
+.hero-eye .he-scan, .hero-eye .he-sheen, .hero-eye .he-frame-glow, .hero-eye .he-pk, .hero-eye .he-msg { opacity: 0; }
+.hero-eye .he-bar { transform-box: fill-box; transform-origin: 0 50%; transform: scaleX(0); }
+.hero-eye .he-halo { opacity: .55; }
+
+/* ---------- 1–2. gaze: small, slow saccades left / centre / right / up / down ---------- */
+.hero-eye .he-gaze, .hero-eye .he-track { animation: he-gaze 10s .6s ease-in-out infinite; }
+/* tracking layer appears after the scanner has started, then keeps following the gaze */
+.hero-eye .he-track { animation: he-gaze 10s .6s ease-in-out infinite, he-appear .9s 2.6s var(--ease-out) both; }
+@keyframes he-gaze {
+  0%, 10%   { transform: translate(0, 0); }
+  20%, 30%  { transform: translate(-14px, 2px); }
+  40%, 46%  { transform: translate(0, -6px); }
+  56%, 66%  { transform: translate(14px, 1px); }
+  76%, 82%  { transform: translate(3px, 7px); }
+  92%, 100% { transform: translate(0, 0); }
+}
+@keyframes he-appear { from { opacity: 0; } to { opacity: 1; } }
+.hero-eye .he-pupil { animation: he-pupil 7s 1s ease-in-out infinite; }
+@keyframes he-pupil { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+.hero-eye .he-halo { animation: he-halo 4.8s 1.2s ease-in-out infinite; }
+@keyframes he-halo { 0%, 20%, 70%, 100% { opacity: .5; } 42% { opacity: .95; } }
+
+/* ---------- 3. scanner: top → bottom across the eye (clipped to the eye shape) ----------
+   the iris sheen and the status bar share its 4.8s timeline so they stay in sync */
+.hero-eye .he-scan { animation: he-scan 4.8s 1.2s linear infinite both; }
+@keyframes he-scan {
+  0%   { transform: translateY(110px); opacity: 0; }
+  6%   { opacity: 1; }
+  78%  { opacity: 1; }
+  80%  { transform: translateY(350px); opacity: 0; }
+  100% { transform: translateY(350px); opacity: 0; }
+}
+.hero-eye .he-sheen { animation: he-sheen 4.8s 1.2s ease-in-out infinite both; }
+@keyframes he-sheen { 0%, 16% { opacity: 0; } 40% { opacity: .55; } 64%, 100% { opacity: 0; } }
+.hero-eye .he-bar { animation: he-bar 4.8s 1.2s ease-in-out infinite both; }
+@keyframes he-bar {
+  0%   { transform: scaleX(0); opacity: 1; }
+  80%  { transform: scaleX(1); opacity: 1; }
+  92%  { transform: scaleX(1); opacity: 0; }
+  100% { transform: scaleX(0); opacity: 0; }
+}
+
+/* ---------- 4. detection frame glow ---------- */
+.hero-eye .he-frame { animation: he-frame 3.6s 2s ease-in-out infinite; }
+@keyframes he-frame { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.018); } }
+.hero-eye .he-frame-glow { animation: he-glow 3.6s 2s ease-in-out infinite both; }
+@keyframes he-glow { 0%, 100% { opacity: 0; } 50% { opacity: .32; } }
+
+/* ---------- 5. tracking points + network ---------- */
+.hero-eye .he-tp { animation: he-tp 2.4s calc(2.6s + var(--d, 0s)) ease-in-out infinite; }
+@keyframes he-tp { 0%, 100% { transform: scale(1); opacity: .7; } 50% { transform: scale(1.35); opacity: 1; } }
+.hero-eye .he-ring { animation: he-spin 28s linear infinite; }
+@keyframes he-spin { to { transform: rotate(360deg); } }
+.hero-eye .he-nodes circle { animation: he-node 3.6s var(--d, 0s) ease-in-out infinite; }
+@keyframes he-node { 0%, 100% { opacity: .6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.15); } }
+.hero-eye .he-link { animation: he-link 3.6s 2s ease-in-out infinite; }
+@keyframes he-link { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
+/* data packets travel along the network lines */
+.hero-eye .he-pk-1 { animation: he-pk-1 5.2s .8s ease-in-out infinite; }
+.hero-eye .he-pk-2 { animation: he-pk-2 5.2s 2.5s ease-in-out infinite; }
+.hero-eye .he-pk-3 { animation: he-pk-3 5.2s 4.1s ease-in-out infinite; }
+@keyframes he-pk-1 { 0% { transform: translate(0, 0); opacity: 0; } 8% { opacity: 1; } 40% { transform: translate(70px, -30px); } 72% { transform: translate(140px, 5px); opacity: 1; } 80%, 100% { transform: translate(140px, 5px); opacity: 0; } }
+@keyframes he-pk-2 { 0% { transform: translate(0, 0); opacity: 0; } 8% { opacity: 1; } 40% { transform: translate(70px, 40px); } 72% { transform: translate(30px, 95px); opacity: 1; } 80%, 100% { transform: translate(30px, 95px); opacity: 0; } }
+@keyframes he-pk-3 { 0% { transform: translate(0, 0); opacity: 0; } 8% { opacity: 1; } 40% { transform: translate(70px, 35px); } 72% { transform: translate(140px, -10px); opacity: 1; } 80%, 100% { transform: translate(140px, -10px); opacity: 0; } }
+
+/* ---------- status card: rotating decorative captions + "ready" dot ---------- */
+.hero-eye .he-msg { animation: he-msg 9s ease-in-out infinite both; }
+.hero-eye .he-msg:nth-child(2) { animation-delay: 3s; }
+.hero-eye .he-msg:nth-child(3) { animation-delay: 6s; }
+@keyframes he-msg {
+  0%        { opacity: 0; transform: translateY(4px); }
+  4%, 30%   { opacity: 1; transform: none; }
+  34%, 100% { opacity: 0; transform: translateY(-4px); }
+}
+.hero-eye .he-dot-ring { animation: he-ping 2.2s ease-out infinite; }
+@keyframes he-ping { 0% { transform: scale(1); opacity: .6; } 100% { transform: scale(2.8); opacity: 0; } }
+
+/* ---------- 6. blink ----------
+   js/home.js adds .js-blink and toggles .is-blink at random 2.6–6.8s intervals (sometimes a double blink).
+   Without JS a slow regular blink is used instead. */
+.hero-eye:not(.js-blink) .he-lid { animation: he-blink-loop 6.5s 3s ease-in-out infinite; }
+.hero-eye.is-blink .he-lid { animation: he-blink .2s ease-in-out; }
+@keyframes he-blink { 0% { transform: scaleY(0); } 45%, 55% { transform: scaleY(1); } 100% { transform: scaleY(0); } }
+@keyframes he-blink-loop { 0%, 96% { transform: scaleY(0); } 97.4%, 97.8% { transform: scaleY(1); } 99.2%, 100% { transform: scaleY(0); } }
+
+/* ---------- responsive (same sizes the static image used) ---------- */
+@media (max-width: 960px) {
+  .hero-eye-wrap { max-width: 340px; }
+}
+
+/* ---------- reduced motion: one calm still frame ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-eye *, .hero-eye *::before, .hero-eye *::after { animation: none !important; }
+  .hero-eye .he-scan { opacity: .85; transform: translateY(230px); }
+  .hero-eye .he-msg:first-child { opacity: 1; }
+  .hero-eye .he-bar { transform: scaleX(.6); }
+  .hero-eye .he-track { opacity: 1; }
+  .hero-eye .he-dot-ring { opacity: 0; }
+}
+@media print {
+  .hero-eye *, .hero-eye *::before, .hero-eye *::after { animation: none !important; }
+  .hero-eye .he-msg:first-child { opacity: 1; }
+}

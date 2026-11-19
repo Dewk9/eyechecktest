@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>คู่มือการใช้งาน | EYE Check</title>
-  <meta name="description" content="คู่มือการใช้งาน EYE Check ทีละขั้นตอน ตั้งแต่สมัครสมาชิก ซักประวัติ ทดสอบสายตา ถ่ายภาพ วิเคราะห์ด้วย AI ไปจนถึงพิมพ์รายงาน">
+  <meta name="description" content="คู่มือการใช้งาน EYE Check ทีละขั้นตอน ตั้งแต่สมัครสมาชิก ซักประวัติ ทดสอบสายตา ถ่ายภาพ วิเคราะห์ด้วย AI ไปจนถึงพิมพ์รายงาน พร้อมวิดีโอสอนและคำถามที่พบบ่อย">
   <link rel="icon" href="/assets/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/components.css">
   <link rel="stylesheet" href="/css/pages.css">
+  <link rel="stylesheet" href="/css/guide.css">
   <link rel="stylesheet" href="/css/responsive.css">
   <link rel="stylesheet" href="/css/print.css">
 </head>
@@ -19,183 +20,92 @@
   <header id="site-header"></header>
   <script src="/js/boot.js"></script>
   <main id="main" tabindex="-1">
-    <div class="container">
-      <div class="page-head">
-        <h1>คู่มือการใช้งาน EYE Check</h1>
-        <p>ขั้นตอนการใช้งานทุกฟังก์ชันของระบบตรวจคัดกรองโรคต้อในดวงตาด้วย AI สำหรับบัญชีส่วนบุคคลและบัญชี อสม./เจ้าหน้าที่</p>
+
+    <!-- Hero -->
+    <section class="g-hero" aria-labelledby="g-title">
+      <div class="container g-hero-grid">
+        <div class="g-hero-text">
+          <p class="g-eyebrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>ศูนย์การเรียนรู้การใช้งาน</p>
+          <h1 id="g-title">คู่มือการใช้งาน <span>EYE Check</span></h1>
+          <p class="g-lead">เรียนรู้การใช้ระบบตรวจคัดกรองโรคต้อในดวงตาด้วย AI ทีละขั้นตอน ตั้งแต่สมัครสมาชิก ซักประวัติ ทดสอบการมองเห็น ถ่ายภาพดวงตา จนถึงอ่านผลและพิมพ์รายงาน สำหรับบัญชีส่วนบุคคลและบัญชี อสม./เจ้าหน้าที่</p>
+
+          <form class="g-search" id="g-search-form" role="search" aria-label="ค้นหาในคู่มือ">
+            <label for="g-search" class="sr-only">ค้นหาวิธีใช้งานที่ต้องการ</label>
+            <span class="g-search-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+            <input id="g-search" type="search" class="g-search-input" placeholder="ค้นหาวิธีใช้งานที่ต้องการ... เช่น กล้อง, อัปโหลด, รหัสผ่าน" autocomplete="off" spellcheck="false"
+              role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="g-results">
+            <kbd class="g-kbd" aria-hidden="true">/</kbd>
+            <button type="button" class="g-search-clear" id="g-search-clear" aria-label="ล้างข้อความค้นหา" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+            <div class="g-results" id="g-results" hidden></div>
+            <span class="sr-only" id="g-search-status" role="status" aria-live="polite"></span>
+          </form>
+
+          <div class="g-hero-actions">
+            <a class="btn btn-accent btn-lg" href="#g1" data-goto="g1">เริ่มต้นใช้งาน<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="btn btn-lg g-btn-light" href="#video" data-goto="video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z"/></svg>วิดีโอสอนการใช้งาน</a>
+          </div>
+          <dl class="g-stats" id="g-stats" aria-label="ขนาดของคู่มือ"></dl>
+        </div>
+
+        <!-- decorative: AI eye scan -->
+        <div class="g-hero-art" aria-hidden="true">
+          <svg viewBox="0 0 320 320" class="g-eye-art">
+            <defs>
+              <radialGradient id="g-iris" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#5cc2f5"/><stop offset=".6" stop-color="#0b8fd8"/><stop offset="1" stop-color="#074f80"/></radialGradient>
+              <linearGradient id="g-scan" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7ef0c0" stop-opacity="0"/><stop offset=".5" stop-color="#7ef0c0" stop-opacity=".9"/><stop offset="1" stop-color="#7ef0c0" stop-opacity="0"/></linearGradient>
+              <clipPath id="g-eye-clip"><path d="M40 160C80 96 120 72 160 72s80 24 120 88c-40 64-80 88-120 88S80 224 40 160z"/></clipPath>
+            </defs>
+            <circle cx="160" cy="160" r="150" class="g-ring g-ring-1"/>
+            <circle cx="160" cy="160" r="122" class="g-ring g-ring-2"/>
+            <path d="M40 160C80 96 120 72 160 72s80 24 120 88c-40 64-80 88-120 88S80 224 40 160z" fill="#fff"/>
+            <g clip-path="url(#g-eye-clip)">
+              <circle cx="160" cy="160" r="56" fill="url(#g-iris)"/>
+              <circle cx="160" cy="160" r="22" fill="#062a45"/>
+              <circle cx="176" cy="142" r="9" fill="#fff" opacity=".85"/>
+              <rect class="g-scanline" x="30" y="60" width="260" height="34" fill="url(#g-scan)"/>
+            </g>
+            <path d="M40 160C80 96 120 72 160 72s80 24 120 88c-40 64-80 88-120 88S80 224 40 160z" fill="none" stroke="#bfe6fb" stroke-width="3"/>
+            <g class="g-corners" fill="none" stroke="#7ef0c0" stroke-width="5" stroke-linecap="round">
+              <path d="M58 92V70h22"/><path d="M262 92V70h-22"/><path d="M58 228v22h22"/><path d="M262 228v22h-22"/>
+            </g>
+          </svg>
+          <div class="g-art-chip g-art-chip-1"><span class="g-dot"></span>AI Eye Screening</div>
+          <div class="g-art-chip g-art-chip-2">ซักประวัติ · ทดสอบสายตา · สแกน</div>
+        </div>
       </div>
-      <div class="guide-layout">
-        <nav class="guide-toc card" aria-label="สารบัญคู่มือ">
-          <h2 class="small" style="font-size:1rem">สารบัญ</h2>
-          <ol id="toc"></ol>
+    </section>
+
+    <div class="container g-layout">
+      <!-- Table of contents (sticky sidebar on desktop, collapsible bar on mobile) -->
+      <aside class="g-side">
+        <button type="button" class="g-toc-bar" id="g-toc-toggle" aria-expanded="false" aria-controls="g-toc">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+          <span class="g-toc-bar-text"><span class="g-toc-bar-label">สารบัญ</span><span id="g-toc-current">เลือกหัวข้อที่ต้องการอ่าน</span></span>
+          <svg class="g-toc-bar-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <nav class="g-toc" id="g-toc" aria-label="สารบัญคู่มือ">
+          <div class="g-toc-top">
+            <h2 class="g-toc-title">สารบัญ</h2>
+            <span class="g-progress-text">อ่านแล้ว <strong id="g-progress-pct">0%</strong></span>
+          </div>
+          <div class="g-progress" aria-hidden="true"><span id="g-progress"></span></div>
+          <div class="g-toc-scroll" id="g-toc-list"></div>
         </nav>
-        <div class="stack" id="guide-content">
+      </aside>
 
-          <section class="card guide-section" id="video">
-            <h2>วิดีโอสอนการใช้งาน</h2>
-            <div class="video-placeholder" role="img" aria-label="ตำแหน่งวิดีโอสอนการใช้งาน (ยังไม่มีวิดีโอ)">
-              <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4z"/></svg>
-                <strong>Video Tutorial — Coming Soon</strong><br><span class="small">วิดีโอสอนการใช้งานจะเผยแพร่เร็ว ๆ นี้ ระหว่างนี้โปรดใช้คู่มือแบบขั้นตอนด้านล่าง</span></div>
-            </div>
-          </section>
-
-          <section class="card guide-section" id="g1" data-title="วิธีสมัครสมาชิก">
-            <div class="card-title"><div class="icon-bubble" data-icon="user"></div><h2>1. วิธีสมัครสมาชิก</h2></div>
-            <ol class="guide-steps">
-              <li>กดปุ่ม <strong>สมัครสมาชิก</strong> ที่มุมขวาบน</li>
-              <li>เลือกประเภทบัญชี: <strong>บัญชีส่วนบุคคล</strong> (ตรวจตนเอง) หรือ <strong>บัญชี อสม./เจ้าหน้าที่</strong> (ตรวจให้ผู้อื่น)</li>
-              <li>บัญชีส่วนบุคคล: กรอกชื่อ-นามสกุล ชื่อบัญชี วันเกิด (ระบบคำนวณอายุให้อัตโนมัติ) เพศ และรหัสผ่าน</li>
-              <li>บัญชีเจ้าหน้าที่: กรอกชื่อ-นามสกุล ชื่อบัญชี ตำแหน่ง สถานที่ทำงาน รหัสผ่าน และ <strong>โค้ดสมัครบัญชีเจ้าหน้าที่</strong> ที่ได้รับจากหน่วยงาน</li>
-              <li>อ่านและยอมรับข้อกำหนดการใช้งานและนโยบายความเป็นส่วนตัว แล้วกด <strong>สมัครสมาชิก</strong></li>
-            </ol>
-          </section>
-
-          <section class="card guide-section" id="g2" data-title="วิธีเข้าสู่ระบบ">
-            <div class="card-title"><div class="icon-bubble" data-icon="lock"></div><h2>2. วิธีเข้าสู่ระบบ</h2></div>
-            <ol class="guide-steps">
-              <li>กด <strong>เข้าสู่ระบบ</strong> แล้วกรอกชื่อบัญชีและรหัสผ่าน</li>
-              <li>เลือก <strong>จดจำฉันในอุปกรณ์นี้</strong> หากเป็นอุปกรณ์ส่วนตัว (ระบบจะคงการเข้าสู่ระบบไว้สูงสุด 30 วัน)</li>
-              <li>ไม่ควรเลือกจดจำบนเครื่องสาธารณะ และควรกด <strong>ออกจากระบบ</strong> ทุกครั้งหลังใช้งาน</li>
-            </ol>
-          </section>
-
-          <section class="card guide-section" id="g3" data-title="วิธีใช้งานบัญชีส่วนบุคคล">
-            <div class="card-title"><div class="icon-bubble" data-icon="user"></div><h2>3. วิธีใช้งานบัญชีส่วนบุคคล</h2></div>
-            <ol class="guide-steps">
-              <li>ซักประวัติสุขภาพครั้งแรกเพียงครั้งเดียว และกลับมาแก้ไขได้ที่เมนูผู้ใช้ → <strong>ประวัติสุขภาพของฉัน</strong></li>
-              <li>ทุกการตรวจจะใช้ประวัติสุขภาพล่าสุดประกอบการประเมิน</li>
-              <li>ดูผลตรวจย้อนหลัง แนวโน้ม และคำแนะนำได้ที่ <strong>ประวัติการตรวจ</strong> และ <strong>แดชบอร์ด</strong></li>
-              <li>บัญชีส่วนบุคคลเห็นเฉพาะข้อมูลของตนเองเท่านั้น</li>
-            </ol>
-          </section>
-
-          <section class="card guide-section" id="g4" data-title="วิธีใช้งานบัญชี อสม./เจ้าหน้าที่">
-            <div class="card-title"><div class="icon-bubble" data-icon="users"></div><h2>4. วิธีใช้งานบัญชีกลุ่ม อสม./เจ้าหน้าที่</h2></div>
-            <ol class="guide-steps">
-              <li>ไปที่ <strong>สแกนดวงตา → จัดการรายชื่อผู้เข้ารับการตรวจ</strong> เพื่อเพิ่ม แก้ไข ค้นหา หรือลบรายชื่อ (ต้องยืนยันก่อนลบ)</li>
-              <li>กด <strong>ตรวจ</strong> ที่รายชื่อ หรือเลือกบุคคลในหน้าซักประวัติ แล้วซักประวัติใหม่ <strong>ทุกครั้ง</strong> ที่ตรวจ</li>
-              <li>กด <strong>ประวัติ</strong> เพื่อดูผลตรวจย้อนหลังรายบุคคล เลือก 2 รายการแล้วกด <strong>เปรียบเทียบผลที่เลือก</strong></li>
-              <li>ดูสถิติภาพรวมและกราฟแนวโน้มโรคต้อของผู้เข้ารับการตรวจทั้งหมดที่ <strong>แดชบอร์ด</strong></li>
-              <li>แต่ละบัญชีเจ้าหน้าที่เห็นเฉพาะรายชื่อที่ตนเองบันทึก</li>
-            </ol>
-          </section>
-
-          <section class="card guide-section" id="g5" data-title="วิธีซักประวัติสุขภาพ">
-            <div class="card-title"><div class="icon-bubble" data-icon="clipboard"></div><h2>5. วิธีซักประวัติสุขภาพ</h2></div>
-            <ol class="guide-steps">
-              <li><strong>ส่วนที่ 1</strong> เลือกช่วงอายุ 1 ข้อ (ระบบเลือกให้จากอายุ)</li>
-              <li><strong>ส่วนที่ 2</strong> เลือกปัจจัยเสี่ยงทุกข้อที่มี หรือเลือก "ไม่มีปัจจัยเสี่ยงข้างต้น"</li>
-              <li><strong>ส่วนที่ 3</strong> เลือกอาการทุกข้อที่มี หรือเลือก "ไม่มีอาการผิดปกติข้างต้น"</li>
-              <li>หากเลือก <strong>อาการเตือนฉุกเฉิน</strong> ระบบจะแจ้งให้พบจักษุแพทย์ทันที โดยไม่รอผล AI</li>
-              <li>ตรวจสอบสรุปข้อมูลก่อนไปขั้นตอนถัดไป</li>
-            </ol>
-          </section>
-
-          <section class="card guide-section" id="g6" data-title="วิธีทดสอบการมองเห็น">
-            <div class="card-title"><div class="icon-bubble" data-icon="eye"></div><h2>6. วิธีทดสอบการมองเห็น</h2></div>
-            <ol class="guide-steps">
-              <li><strong>ปรับเทียบขนาดหน้าจอ</strong> (ทำครั้งเดียวต่ออุปกรณ์): วางไม้บรรทัดทาบหน้าจอ ปรับเส้นให้ยาวเท่า 5 หรือ 10 ซม. แล้วตรวจสอบแถบ 5 ซม. ระบบจะคำนวณ px/มม. ของหน้าจอ (ต้องปรับเทียบใหม่หากเปลี่ยนอุปกรณ์หรือซูมเบราว์เซอร์) ไม่ต้องใช้บัตร</li>
-              <li><strong>ปรับเทียบระยะด้วยใบหน้า</strong> 1 ครั้งต่อผู้เข้ารับการตรวจ: เลือก "วัดด้วยจุดบอดของตา" (ไม่ต้องใช้อุปกรณ์ ต้องใช้หน้าจอกว้างพอ) หรือ "วัดด้วยตลับเมตร" ระหว่างนั้นกล้องจะบันทึกขนาดใบหน้าเพื่อใช้วัดระยะเป็นเซนติเมตร</li>
-              <li>ก่อนเริ่มแต่ละแบบทดสอบ ระบบจะวัดระยะจากกล้องและแนะนำ "ถอยห่างออกไป" หรือ "ขยับเข้ามาใกล้อีกนิด" หรือกด <strong>ยืนยันระยะทดสอบ</strong> เพื่อใช้ระยะปัจจุบัน ระบบจะคำนวณขนาดตัวอักษรจากระยะที่วัดได้ และเตือนหากขยับระหว่างการทดสอบ</li>
-              <li>เลือกการทดสอบ หรือกด <strong>ทดสอบทั้งหมดตามลำดับ</strong> — ระบบทดสอบตาขวาก่อน แล้วตาซ้าย</li>
-              <li>ปิดตาอีกข้างด้วยฝ่ามือ ทำตามคำแนะนำของแต่ละแบบทดสอบ</li>
-              <li>กด <strong>บันทึกผลการทดสอบ</strong> หรือข้ามขั้นตอนนี้ได้ (การประเมินจะครบถ้วนน้อยลง)</li>
-            </ol>
-            <div class="alert alert-warning mt-3"><div>การทดสอบผ่านหน้าจอไม่ใช่การตรวจสายตามาตรฐานโดยผู้เชี่ยวชาญ</div></div>
-          </section>
-
-          <section class="card guide-section" id="g7" data-title="วิธีใช้กล้องถ่ายภาพดวงตา">
-            <div class="card-title"><div class="icon-bubble" data-icon="camera"></div><h2>7. วิธีใช้กล้องถ่ายภาพดวงตา</h2></div>
-            <ol class="guide-steps">
-              <li>เลือกว่าจะยินยอมให้ใช้ภาพเพื่อพัฒนา AI หรือไม่ (ไม่ยินยอมก็ตรวจได้ตามปกติ)</li>
-              <li>เลือก <strong>ตาขวา</strong> หรือ <strong>ตาซ้าย</strong> แล้วกด <strong>เปิดกล้อง</strong> และอนุญาตการใช้กล้อง</li>
-              <li>กด <strong>สลับกล้อง</strong> เพื่อใช้กล้องหน้า/หลัง (แนะนำกล้องหลังให้ผู้อื่นช่วยถ่าย)</li>
-              <li>กด <strong>เริ่มสแกนแบบ Real-time</strong> ระบบจะแนะนำ เช่น "ขยับเข้าใกล้อีกนิด" "กรุณาเพิ่มแสงสว่าง" เปิด <strong>คำแนะนำด้วยเสียง</strong> ได้</li>
-              <li>เมื่อกรอบเป็นสีเขียวและขึ้น "สามารถถ่ายภาพได้แล้ว" ให้กดปุ่มถ่ายภาพ</li>
-              <li>ตรวจสอบผลการตรวจคุณภาพภาพ แล้วกด <strong>ยืนยันภาพ</strong> หรือ <strong>ถ่ายใหม่</strong></li>
-            </ol>
-          </section>
-
-          <section class="card guide-section" id="g8" data-title="วิธีอัปโหลดภาพ">
-            <div class="card-title"><div class="icon-bubble" data-icon="upload"></div><h2>8. วิธีอัปโหลดภาพ</h2></div>
-            <ol class="guide-steps">
-              <li>กด <strong>อัปโหลดภาพจากอุปกรณ์</strong> แล้วเลือกไฟล์ JPG, PNG หรือ WEBP ขนาดไม่เกิน 8 MB</li>
-              <li>ระบบจะตรวจคุณภาพภาพ (ความเบลอ ความสว่าง การรับแสง ความละเอียด ตำแหน่งดวงตา) ก่อนให้ยืนยัน</li>
-              <li>ข้อมูล EXIF/ตำแหน่ง GPS ในไฟล์จะถูกลบออกก่อนจัดเก็บ</li>
-            </ol>
-          </section>
-
-          <section class="card guide-section" id="g9" data-title="วิธีวิเคราะห์ผลด้วย AI">
-            <div class="card-title"><div class="icon-bubble" data-icon="cpu"></div><h2>9. วิธีวิเคราะห์ผลด้วย AI</h2></div>
-            <ol class="guide-steps">
-              <li>หลังยืนยันภาพ ระบบจะแสดงสถานะ: Uploading Image → Checking Image Quality → AI Analyzing → Processing Complete</li>
-              <li>หาก AI ยังไม่ได้เชื่อมต่อ (AI Not Connected) หรือวิเคราะห์ไม่สำเร็จ ระบบจะแจ้งชัดเจนและให้ลองใหม่ได้ — ไม่มีการแสดงผลปลอม</li>
-              <li>ระบบแสดงผลเฉพาะโรคที่โมเดลรองรับจริง โรคที่ไม่รองรับจะขึ้นว่า Not Supported</li>
-            </ol>
-          </section>
-
-          <section class="card guide-section" id="g10" data-title="วิธีดูผลการตรวจ">
-            <div class="card-title"><div class="icon-bubble" data-icon="file"></div><h2>10. วิธีดูผลการตรวจ</h2></div>
-            <ol class="guide-steps">
-              <li>หน้าผลการตรวจแยกเป็น: ผล AI (Confidence จากโมเดลจริง), ผลซักประวัติ, ผลทดสอบการมองเห็น และสรุปความเสี่ยง</li>
-              <li>ระดับความเสี่ยง: ต่ำ / ปานกลาง / สูง / ส่งต่อพบจักษุแพทย์ด่วน / สรุปไม่ได้</li>
-              <li>อ่านคำแนะนำการป้องกันและดูแลสุขภาพตาตามประเภทโรคที่พบ</li>
-            </ol>
-          </section>
-
-          <section class="card guide-section" id="g11" data-title="วิธีบันทึกผลการตรวจ">
-            <div class="card-title"><div class="icon-bubble" data-icon="save"></div><h2>11. วิธีบันทึกผลการตรวจ</h2></div>
-            <ol class="guide-steps">
-              <li>กด <strong>บันทึกผลการตรวจ</strong> ที่ด้านล่างของหน้าผลการตรวจ</li>
-              <li>ผลที่บันทึกแล้วจะถูกนับในแดชบอร์ด ผลที่ยังไม่บันทึกจะแสดงเป็น "ร่าง" ในประวัติการตรวจ</li>
-            </ol>
-          </section>
-
-          <section class="card guide-section" id="g12" data-title="วิธีดูประวัติย้อนหลัง">
-            <div class="card-title"><div class="icon-bubble" data-icon="history"></div><h2>12. วิธีดูประวัติย้อนหลัง</h2></div>
-            <ol class="guide-steps">
-              <li>ไปที่ <strong>ประวัติการตรวจ</strong> ค้นหาด้วยรหัสการตรวจ (หรือชื่อสำหรับเจ้าหน้าที่)</li>
-              <li>กรองตามช่วงวันที่ ประเภทโรค ระดับความเสี่ยง หรือสถานะ และเรียงลำดับโดยคลิกหัวตาราง</li>
-              <li>กด <strong>ดูรายละเอียด</strong> หรือไอคอนถังขยะเพื่อลบ (ต้องยืนยันก่อน)</li>
-            </ol>
-          </section>
-
-          <section class="card guide-section" id="g13" data-title="วิธีดู Dashboard">
-            <div class="card-title"><div class="icon-bubble" data-icon="chart"></div><h2>13. วิธีดู Dashboard</h2></div>
-            <ol class="guide-steps">
-              <li>แดชบอร์ดแสดงจำนวนการตรวจ ผลที่ต้องส่งต่อ แนวโน้ม และรายการล่าสุด</li>
-              <li>กราฟวงกลมแสดงสัดส่วนต้อลม ต้อกระจก ต้อหิน ต้อเนื้อ จากผลที่สรุปได้ (ไม่รวมผลที่สรุปไม่ได้)</li>
-              <li>เลือกช่วงวันที่ ประเภทโรค และ (สำหรับเจ้าหน้าที่) วิธีนับ ตามผลตรวจหรือตามบุคคล</li>
-            </ol>
-          </section>
-
-          <section class="card guide-section" id="g14" data-title="วิธีพิมพ์รายงาน">
-            <div class="card-title"><div class="icon-bubble" data-icon="printer"></div><h2>14. วิธีพิมพ์รายงาน</h2></div>
-            <ol class="guide-steps">
-              <li>เปิดหน้าผลการตรวจ (หรือหน้าประวัติรายบุคคลสำหรับเจ้าหน้าที่) แล้วกด <strong>พิมพ์รายงาน</strong></li>
-              <li>เลือกเครื่องพิมพ์ หรือ "บันทึกเป็น PDF" ในหน้าต่างพิมพ์ของเบราว์เซอร์</li>
-            </ol>
-          </section>
-
-          <section class="card guide-section" id="g15" data-title="ข้อควรระวังในการใช้งาน">
-            <div class="card-title"><div class="icon-bubble" data-icon="alert"></div><h2>15. ข้อควรระวังในการใช้งาน</h2></div>
-            <ul class="list-check" id="cautions"></ul>
-          </section>
-
-          <section class="card guide-section faq" id="faq" data-title="คำถามที่พบบ่อย (FAQ)">
-            <h2>คำถามที่พบบ่อย (FAQ)</h2>
-            <details><summary>ผลจาก EYE Check ใช้แทนการวินิจฉัยของแพทย์ได้หรือไม่?</summary><p>ไม่ได้ ผลการวิเคราะห์เป็นเพียงการคัดกรองเบื้องต้น ต้องได้รับการตรวจยืนยันจากจักษุแพทย์</p></details>
-            <details><summary>ทำไมต้อหินจึงแสดงหมายเหตุพิเศษ?</summary><p>ต้อหินไม่สามารถยืนยันจากภาพถ่ายภายนอกของดวงตาได้ ต้องตรวจความดันตา ขั้วประสาทตา และลานสายตาโดยจักษุแพทย์</p></details>
-            <details><summary>ถ้าไม่ยินยอมให้ใช้ภาพพัฒนา AI จะตรวจได้หรือไม่?</summary><p>ได้ตามปกติ ภาพจะถูกใช้เพื่อการตรวจของคุณเท่านั้น และคุณเพิกถอนความยินยอมภายหลังได้ที่หน้าข้อมูลส่วนตัว</p></details>
-            <details><summary>ค่า Confidence คืออะไร?</summary><p>คือค่าความมั่นใจที่โมเดล AI ส่งกลับมาจริงสำหรับแต่ละคลาส ไม่ใช่ความน่าจะเป็นที่จะเป็นโรค และไม่ได้นำมารวมกับคะแนนจากการซักประวัติ</p></details>
-            <details><summary>ทำไมขึ้นว่า AI Not Connected?</summary><p>ผู้ดูแลระบบยังไม่ได้เชื่อมต่อโมเดลบน Roboflow หรือบริการขัดข้องชั่วคราว ภาพของคุณถูกบันทึกแล้วและสามารถวิเคราะห์ใหม่ภายหลังได้</p></details>
-            <details><summary>กล้องเปิดไม่ได้ ทำอย่างไร?</summary><p>ตรวจสอบว่าเปิดเว็บผ่าน HTTPS อนุญาตการใช้กล้องในเบราว์เซอร์ และไม่มีแอปอื่นใช้กล้องอยู่ หรือใช้การอัปโหลดภาพแทน</p></details>
-          </section>
+      <div class="g-main" id="guide-content" aria-busy="true">
+        <div class="sk" role="status"><span class="sr-only">กำลังโหลดคู่มือ...</span>
+          <div class="card g-sk-card"><span class="skeleton sk-line" style="width:38%;height:22px"></span><span class="skeleton sk-line" style="width:90%"></span><span class="skeleton sk-line" style="width:72%"></span></div>
+          <div class="card g-sk-card"><span class="skeleton g-sk-video"></span></div>
+          <div class="card g-sk-card"><span class="skeleton sk-line" style="width:44%;height:22px"></span><span class="skeleton sk-line" style="width:84%"></span><span class="skeleton sk-line" style="width:66%"></span><span class="skeleton sk-line" style="width:78%"></span></div>
         </div>
       </div>
     </div>
+
+    <button type="button" class="g-top" id="g-top" aria-label="กลับด้านบน"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
   </main>
   <footer id="site-footer"></footer>
+  <noscript><div class="container"><div class="alert alert-warning">กรุณาเปิดใช้งาน JavaScript เพื่อใช้งานคู่มือ EYE Check</div></div></noscript>
   <script type="module" src="/js/app.js"></script>
 </body>
 </html>

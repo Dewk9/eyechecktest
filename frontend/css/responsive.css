@@ -48,11 +48,10 @@
 }
 
 @media (max-width: 960px) {
-  .hero-grid, .camera-layout, .result-head, .guide-layout { grid-template-columns: 1fr; }
+  .hero-grid, .camera-layout, .result-head { grid-template-columns: 1fr; }
   .hero-art { order: -1; }
   .hero-art img { max-width: 340px; }
   .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .guide-toc { position: static; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
 
   .admin-shell { grid-template-columns: 1fr; }
