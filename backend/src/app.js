@@ -4,7 +4,7 @@ import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import { config, PROJECT_ROOT, BACKEND_ROOT } from './config/env.js';
+import { config, validateConfig, PROJECT_ROOT, BACKEND_ROOT } from './config/env.js';
 import { authenticate } from './middleware/auth.js';
 import { csrfProtection, httpsRedirect, apiLimiter } from './middleware/security.js';
 import { requestId, requestLogger, apiNotFound, errorHandler } from './middleware/error-handler.js';
@@ -97,4 +97,21 @@ export function createApp() {
 
   app.use(errorHandler);
   return app;
+}
+
+/**
+ * Default export for Vercel, which picks this module as the serverless entry and
+ * requires a default-exported function. The app is built lazily on the first
+ * request so importing createApp (src/server.js, tests) has no side effects.
+ */
+let vercelApp;
+export default function handler(req, res) {
+  if (!vercelApp) {
+    const { errors } = validateConfig();
+    if (errors.length) {
+      throw new Error(`Configuration invalid: ${errors.join('; ')} — set these in the Vercel project's Environment Variables and redeploy.`);
+    }
+    vercelApp = createApp();
+  }
+  return vercelApp(req, res);
 }
