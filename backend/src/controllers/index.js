@@ -142,7 +142,7 @@ export const activity = {
     let vid = req.cookies?.ec_vid;
     if (!vid || !/^[0-9a-f-]{36}$/.test(vid)) {
       vid = crypto.randomUUID();
-      res.cookie('ec_vid', vid, { httpOnly: true, sameSite: 'strict', secure: config.cookieSecure, maxAge: 365 * 864e5, path: '/' });
+      res.cookie('ec_vid', vid, { httpOnly: true, sameSite: config.cookieSameSite, secure: config.cookieSecure, maxAge: 365 * 864e5, path: '/' });
     }
     await adminService.trackEvent(vid, req.body.event, req.body.path, req.auth?.userId);
     res.status(204).end();

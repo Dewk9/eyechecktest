@@ -38,6 +38,8 @@ export const config = Object.freeze({
   trustProxy: bool('TRUST_PROXY', isProd),
   forceHttps: bool('FORCE_HTTPS', isProd),
   cookieSecure: bool('COOKIE_SECURE', isProd),
+  // 'strict' when frontend and backend share an origin; 'none' when the frontend is on another domain
+  cookieSameSite: str('COOKIE_SAMESITE', 'strict').toLowerCase(),
   jwtSecret: str('JWT_SECRET'),
   // optional dedicated key for encrypting staff registration codes (falls back to a key derived from JWT_SECRET)
   registrationCodeKey: str('REGISTRATION_CODE_KEY'),
@@ -92,6 +94,8 @@ export function validateConfig(c = config) {
   if (c.registrationCodeKey && c.registrationCodeKey.length < 32) errors.push('REGISTRATION_CODE_KEY must be at least 32 characters');
   if (!(c.port > 0 && c.port < 65536)) errors.push('BACKEND_PORT must be a valid port number');
   try { new URL(c.frontendUrl); } catch { errors.push('FRONTEND_URL is not a valid URL'); }
+  if (!['strict', 'lax', 'none'].includes(c.cookieSameSite)) errors.push('COOKIE_SAMESITE must be strict, lax or none');
+  if (c.cookieSameSite === 'none' && !c.cookieSecure) errors.push('COOKIE_SAMESITE=none requires COOKIE_SECURE=true');
 
   if (c.roboflow.workflowUrl) {
     try {

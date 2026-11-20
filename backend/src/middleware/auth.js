@@ -7,7 +7,7 @@ import { calcAge } from '../utils/helpers.js';
 export const COOKIES = Object.freeze({ access: 'ec_at', refresh: 'ec_rt', remember: 'ec_rm' });
 
 function baseCookie() {
-  return { httpOnly: true, secure: config.cookieSecure, sameSite: 'strict', path: '/' };
+  return { httpOnly: true, secure: config.cookieSecure, sameSite: config.cookieSameSite, path: '/' };
 }
 
 /**

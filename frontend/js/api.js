@@ -3,7 +3,11 @@
  * so no token is ever stored in JavaScript. Every state-changing request
  * carries the X-Requested-With header required by the CSRF guard.
  */
-const BASE = '/api';
+// Deployed backend. When the page is opened from localhost (backend serving the frontend),
+// keep calling the same origin so local development does not hit production.
+const BACKEND_URL = 'https://eyecheck-five.vercel.app';
+const IS_LOCAL = ['localhost', '127.0.0.1'].includes(window.location.hostname);
+const BASE = IS_LOCAL ? '/api' : `${BACKEND_URL}/api`;
 const DEFAULT_TIMEOUT = 30000;
 const READ_TIMEOUT = 20000; // GETs that take longer than this are treated as failed (with a retry option)
 
@@ -52,7 +56,7 @@ async function request(method, path, { body, query, timeout = DEFAULT_TIMEOUT, k
 
   let res;
   try {
-    res = await fetch(buildUrl(path, query), { method, headers, body: payload, credentials: 'same-origin', signal: controller.signal, keepalive });
+    res = await fetch(buildUrl(path, query), { method, headers, body: payload, credentials: 'include', signal: controller.signal, keepalive });
   } catch (err) {
     if (err.name === 'AbortError') throw new ApiError(0, 'TIMEOUT', MESSAGES.TIMEOUT);
     throw new ApiError(0, navigator.onLine ? 'NETWORK' : 'NO_INTERNET', navigator.onLine ? MESSAGES.NETWORK : MESSAGES.NO_INTERNET);
