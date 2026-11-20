@@ -35,7 +35,8 @@ export function createApp() {
         'font-src': ["'self'", 'https://fonts.gstatic.com', 'data:'],
         'img-src': ["'self'", 'data:', 'blob:', supabaseOrigin, 'https://*.roboflow.com', 'https://storage.googleapis.com'].filter(Boolean),
         'media-src': ["'self'", 'blob:'],
-        'connect-src': ["'self'"],
+        // Extra origins (e.g. the deployed backend) let a locally served frontend call a remote API.
+        'connect-src': ["'self'", ...config.cspConnectSrc],
         'frame-ancestors': ["'none'"],
         'object-src': ["'none'"],
         'base-uri': ["'self'"],

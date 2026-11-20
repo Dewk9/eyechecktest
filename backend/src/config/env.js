@@ -35,6 +35,8 @@ export const config = Object.freeze({
   port: int('BACKEND_PORT', 3000),
   frontendUrl: str('FRONTEND_URL', 'http://localhost:3000').replace(/\/+$/, ''),
   serveFrontend: bool('SERVE_FRONTEND', true),
+  // Comma-separated origins added to the CSP connect-src of the served frontend.
+  cspConnectSrc: str('CSP_CONNECT_SRC').split(',').map((s) => s.trim()).filter(Boolean),
   trustProxy: bool('TRUST_PROXY', isProd),
   forceHttps: bool('FORCE_HTTPS', isProd),
   cookieSecure: bool('COOKIE_SECURE', isProd),

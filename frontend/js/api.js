@@ -4,10 +4,22 @@
  * carries the X-Requested-With header required by the CSRF guard.
  */
 // Deployed backend. When the page is opened from localhost (backend serving the frontend),
-// keep calling the same origin so local development does not hit production.
-const BACKEND_URL = 'https://eyecheck-five.vercel.app';
+// keep calling the same origin so local development does not hit production — unless the
+// developer opts in with ?api=remote (remembered in localStorage; ?api=local switches back).
+const BACKEND_URL = 'https://eyechecktest.vercel.app';
 const IS_LOCAL = ['localhost', '127.0.0.1'].includes(window.location.hostname);
-const BASE = IS_LOCAL ? '/api' : `${BACKEND_URL}/api`;
+const API_TARGET_KEY = 'eyecheck.apiTarget';
+function localApiTarget() {
+  try {
+    const q = new URLSearchParams(window.location.search).get('api');
+    if (q === 'remote' || q === 'local') localStorage.setItem(API_TARGET_KEY, q);
+    return localStorage.getItem(API_TARGET_KEY) || 'local';
+  } catch {
+    return 'local';
+  }
+}
+const USE_REMOTE = !IS_LOCAL || localApiTarget() === 'remote';
+const BASE = USE_REMOTE ? `${BACKEND_URL}/api` : '/api';
 const DEFAULT_TIMEOUT = 30000;
 const READ_TIMEOUT = 20000; // GETs that take longer than this are treated as failed (with a retry option)
 
