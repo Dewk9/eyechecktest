@@ -4,7 +4,7 @@
   "private": true,
   "description": "EYE Check backend API — Express + Supabase + Roboflow",
   "type": "module",
-  "main": "src/server.js",
+  "main": "index.js",
   "engines": {
     "node": ">=20.10"
   },
