@@ -20,3 +20,21 @@ Thumbs.db
 # Build / coverage
 dist/
 coverage/
+
+# Claude Code local settings (personal, not shared)
+.claude/settings.local.json
+
+# More package-manager logs / caches
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.npm/
+.eslintcache
+
+# Test / coverage output
+.nyc_output/
+
+# Temp files
+tmp/
+*.tmp
+*.swp
