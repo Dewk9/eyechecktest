@@ -42,7 +42,8 @@ export const config = Object.freeze({
   trustProxy: bool('TRUST_PROXY', isProd),
   forceHttps: bool('FORCE_HTTPS', isProd),
   cookieSecure: bool('COOKIE_SECURE', isProd),
-  // 'strict' when frontend and backend share an origin; 'none' when the frontend is on another domain
+  // 'lax' when the frontend proxies /api to this backend (Vercel rewrite); 'strict' when the backend
+  // serves the frontend itself; 'none' only for a cross-site frontend (blocked by Safari ITP)
   cookieSameSite: str('COOKIE_SAMESITE', 'strict').toLowerCase(),
   jwtSecret: str('JWT_SECRET'),
   // optional dedicated key for encrypting staff registration codes (falls back to a key derived from JWT_SECRET)

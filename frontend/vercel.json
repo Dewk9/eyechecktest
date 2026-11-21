@@ -10,5 +10,8 @@
       "source": "/vendor/mediapipe/wasm/(.*).wasm",
       "headers": [{ "key": "Content-Type", "value": "application/wasm" }]
     }
+  ],
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://eyechecktest.vercel.app/api/:path*" }
   ]
 }

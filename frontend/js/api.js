@@ -3,9 +3,10 @@
  * so no token is ever stored in JavaScript. Every state-changing request
  * carries the X-Requested-With header required by the CSRF guard.
  */
-// Deployed backend. When the page is opened from localhost (backend serving the frontend),
-// keep calling the same origin so local development does not hit production — unless the
-// developer opts in with ?api=remote (remembered in localStorage; ?api=local switches back).
+// Deployed pages call /api on their own origin; frontend/vercel.json rewrites it to the backend,
+// so auth cookies are first-party (cross-site cookies are blocked by Safari ITP).
+// From localhost, /api is the local backend unless the developer opts in to the deployed
+// backend with ?api=remote (remembered in localStorage; ?api=local switches back).
 const BACKEND_URL = 'https://eyechecktest.vercel.app';
 const IS_LOCAL = ['localhost', '127.0.0.1'].includes(window.location.hostname);
 const API_TARGET_KEY = 'eyecheck.apiTarget';
@@ -18,7 +19,7 @@ function localApiTarget() {
     return 'local';
   }
 }
-const USE_REMOTE = !IS_LOCAL || localApiTarget() === 'remote';
+const USE_REMOTE = IS_LOCAL && localApiTarget() === 'remote';
 const BASE = USE_REMOTE ? `${BACKEND_URL}/api` : '/api';
 const DEFAULT_TIMEOUT = 30000;
 const READ_TIMEOUT = 20000; // GETs that take longer than this are treated as failed (with a retry option)

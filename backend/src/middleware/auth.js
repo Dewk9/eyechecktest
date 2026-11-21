@@ -11,7 +11,7 @@ function baseCookie() {
 }
 
 /**
- * Tokens live in httpOnly, SameSite=Strict cookies (not reachable by JS).
+ * Tokens live in httpOnly cookies (SameSite from COOKIE_SAMESITE; not reachable by JS).
  * Without "remember me" they are session cookies (cleared when the browser closes).
  */
 export function setSessionCookies(res, session, remember) {
