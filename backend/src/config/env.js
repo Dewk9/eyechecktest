@@ -33,7 +33,9 @@ export const config = Object.freeze({
   isProd,
   isTest: NODE_ENV === 'test',
   port: int('BACKEND_PORT', 3000),
-  frontendUrl: str('FRONTEND_URL', 'http://localhost:3000').replace(/\/+$/, ''),
+  // Comma-separated list of allowed frontend origins (CORS + CSRF), e.g.
+  // https://eyechecktest-frontend.vercel.app,http://localhost:3000
+  frontendUrls: str('FRONTEND_URL', 'http://localhost:3000').split(',').map((s) => s.trim().replace(/\/+$/, '')).filter(Boolean),
   serveFrontend: bool('SERVE_FRONTEND', true),
   // Comma-separated origins added to the CSP connect-src of the served frontend.
   cspConnectSrc: str('CSP_CONNECT_SRC').split(',').map((s) => s.trim()).filter(Boolean),
@@ -95,7 +97,10 @@ export function validateConfig(c = config) {
   if (!c.jwtSecret || c.jwtSecret.length < 32) errors.push('JWT_SECRET must be at least 32 characters');
   if (c.registrationCodeKey && c.registrationCodeKey.length < 32) errors.push('REGISTRATION_CODE_KEY must be at least 32 characters');
   if (!(c.port > 0 && c.port < 65536)) errors.push('BACKEND_PORT must be a valid port number');
-  try { new URL(c.frontendUrl); } catch { errors.push('FRONTEND_URL is not a valid URL'); }
+  if (!c.frontendUrls.length) errors.push('FRONTEND_URL is required');
+  for (const u of c.frontendUrls) {
+    try { new URL(u); } catch { errors.push(`FRONTEND_URL contains an invalid URL: ${u}`); }
+  }
   if (!['strict', 'lax', 'none'].includes(c.cookieSameSite)) errors.push('COOKIE_SAMESITE must be strict, lax or none');
   if (c.cookieSameSite === 'none' && !c.cookieSecure) errors.push('COOKIE_SAMESITE=none requires COOKIE_SECURE=true');
 

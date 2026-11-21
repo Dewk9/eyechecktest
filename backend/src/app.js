@@ -54,7 +54,7 @@ export function createApp() {
 
   app.use(httpsRedirect);
   app.use(requestId);
-  app.use(cors({ origin: [config.frontendUrl], credentials: true, methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'] }));
+  app.use(cors({ origin: config.frontendUrls, credentials: true, methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'] }));
   app.use(express.json({ limit: '1mb' }));
   app.use(express.urlencoded({ extended: false, limit: '100kb' }));
   app.use(cookieParser());

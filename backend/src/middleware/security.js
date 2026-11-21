@@ -17,7 +17,7 @@ export function csrfProtection(req, res, next) {
   }
   const origin = req.get('Origin');
   if (origin) {
-    const allowed = new Set([config.frontendUrl, `${req.protocol}://${req.get('host')}`]);
+    const allowed = new Set([...config.frontendUrls, `${req.protocol}://${req.get('host')}`]);
     if (!allowed.has(origin)) return next(new AppError(403, 'CSRF_REJECTED', 'ไม่อนุญาตคำขอจากต้นทางนี้'));
   }
   return next();
