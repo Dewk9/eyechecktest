@@ -7,6 +7,12 @@
       "runtimeArgs": ["--prefix", "backend", "run", "dev"],
       "port": 3000,
       "autoPort": false
+    },
+    {
+      "name": "frontend-dist",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "4000", "--directory", "frontend/dist"],
+      "port": 4000
     }
   ]
 }

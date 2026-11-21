@@ -1,0 +1,13 @@
+{
+  "name": "eye-check-frontend",
+  "private": true,
+  "type": "module",
+  "description": "Static frontend. `npm run build` produces dist/ for hosting without the backend (e.g. Vercel), adding the files the backend otherwise serves: /vendor/chart.js, /vendor/mediapipe and /ai-shared.",
+  "scripts": {
+    "build": "node scripts/build.mjs"
+  },
+  "dependencies": {
+    "@mediapipe/tasks-vision": "0.10.14",
+    "chart.js": "4.6.1"
+  }
+}
