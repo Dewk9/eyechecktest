@@ -15,12 +15,15 @@ import { toGrayscale, assessQuality, guidanceFromFrame, QUALITY_THRESHOLDS } fro
 const root = () => qs('#page-root');
 const MAX_UPLOAD = 8 * 1024 * 1024;
 const OUTPUT_MAX_SIDE = 1600;
+// phones/tablets (iPadOS reports itself as "Macintosh" but has touch points)
+const IS_MOBILE = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
+  || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
 
 const state = {
   stream: null,
   facing: 'environment',
   deviceIds: [],
-  deviceIndex: 0,
+  deviceId: null, // desktop only: a specific webcam picked by "switch camera"
   scanning: false,
   loopTimer: null,
   voice: false,
@@ -178,22 +181,31 @@ function cameraErrorMessage(err) {
   }
 }
 
-async function startCamera() {
+/**
+ * Opens the camera. Phones pick front/back by facingMode (they expose several back lenses,
+ * so walking the device list lands on another back lens). Desktops with several webcams use
+ * state.deviceId. exactFacing insists on the requested side (used by "switch camera").
+ */
+async function startCamera({ exactFacing = false } = {}) {
   if (!navigator.mediaDevices?.getUserMedia) { toast(cameraErrorMessage({ name: 'NotFoundError' }), 'error', 7000); return; }
   stopCamera();
-  const deviceId = state.deviceIds[state.deviceIndex];
-  const constraints = {
-    audio: false,
-    video: deviceId
-      ? { deviceId: { exact: deviceId }, width: { ideal: 1920 }, height: { ideal: 1080 } }
-      : { facingMode: { ideal: state.facing }, width: { ideal: 1920 }, height: { ideal: 1080 } },
-  };
+  const size = { width: { ideal: 1920 }, height: { ideal: 1080 } };
+  const video = state.deviceId
+    ? { deviceId: { exact: state.deviceId }, ...size }
+    : { facingMode: exactFacing ? { exact: state.facing } : { ideal: state.facing }, ...size };
   try {
-    state.stream = await navigator.mediaDevices.getUserMedia(constraints);
+    state.stream = await navigator.mediaDevices.getUserMedia({ audio: false, video });
   } catch (err) {
-    toast(cameraErrorMessage(err), 'error', 8000);
-    showGuide(cameraErrorMessage(err), 'warn');
-    return;
+    // no camera on the requested side: fall back to whatever the device offers
+    const retry = exactFacing && !state.deviceId && ['OverconstrainedError', 'NotFoundError'].includes(err?.name);
+    try {
+      if (!retry) throw err;
+      state.stream = await navigator.mediaDevices.getUserMedia({ audio: false, video: { facingMode: { ideal: state.facing }, ...size } });
+    } catch (err2) {
+      toast(cameraErrorMessage(err2), 'error', 8000);
+      showGuide(cameraErrorMessage(err2), 'warn');
+      return;
+    }
   }
   const devices = await navigator.mediaDevices.enumerateDevices().catch(() => []);
   state.deviceIds = devices.filter((d) => d.kind === 'videoinput').map((d) => d.deviceId).filter(Boolean);
@@ -201,15 +213,15 @@ async function startCamera() {
   const settings = track.getSettings?.() ?? {};
   if (settings.facingMode) state.facing = settings.facingMode;
 
-  const video = qs('#video');
-  video.srcObject = state.stream;
-  video.classList.toggle('mirror', state.facing === 'user');
-  await video.play().catch(() => {});
+  const videoEl = qs('#video');
+  videoEl.srcObject = state.stream;
+  videoEl.classList.toggle('mirror', state.facing === 'user');
+  await videoEl.play().catch(() => {});
   showLive(true);
   qs('#btn-camera').innerHTML = `${icons.x}ปิดกล้อง`;
   qs('#btn-scan').disabled = false;
   qs('#btn-capture').disabled = false;
-  qs('#btn-switch').disabled = state.deviceIds.length < 2 && !/Android|iPhone|iPad/i.test(navigator.userAgent);
+  qs('#btn-switch').disabled = state.deviceIds.length < 2 && !IS_MOBILE;
   showGuide('กรุณาจัดดวงตาให้อยู่กลางกรอบ แล้วกด "เริ่มสแกนแบบ Real-time"', 'info');
   if (!state.scanning) toggleScanning();
 }
@@ -230,14 +242,22 @@ function stopCamera() {
 }
 
 async function switchCamera() {
-  if (state.deviceIds.length > 1) {
-    state.deviceIndex = (state.deviceIndex + 1) % state.deviceIds.length;
-  } else {
+  const btn = qs('#btn-switch');
+  if (btn) btn.disabled = true; // ignore double taps while the camera restarts
+  if (IS_MOBILE || state.deviceIds.length < 2) {
+    // phone: flip front <-> back in one tap
     state.facing = state.facing === 'user' ? 'environment' : 'user';
-    state.deviceIds = [];
+    state.deviceId = null;
+    await startCamera({ exactFacing: true });
+    toast(state.facing === 'user' ? 'ใช้กล้องหน้า' : 'ใช้กล้องหลัง', 'info', 2000);
+  } else {
+    // desktop with several webcams: go to the one after the camera that is actually open
+    const current = state.stream?.getVideoTracks()[0]?.getSettings?.().deviceId ?? state.deviceId;
+    const i = state.deviceIds.indexOf(current);
+    state.deviceId = state.deviceIds[(i + 1) % state.deviceIds.length];
+    await startCamera();
+    toast('สลับกล้องแล้ว', 'info', 2000);
   }
-  await startCamera();
-  toast(state.facing === 'user' ? 'ใช้กล้องหน้า' : 'สลับกล้องแล้ว', 'info', 2000);
 }
 
 function showLive(on) {
